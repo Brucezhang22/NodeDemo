@@ -1,3 +1,14 @@
-var expressDemo = require('./src/expressDemo');
+var express = require('express');
 
-expressDemo.run();
+var app = express();
+
+app.set('port', process.env.PORT || 3300);
+app.set('views', __dirname + '/views');
+
+app.get('/', function (request, response) {
+    response.send('Hello World');
+});
+
+app.listen(app.get('port'), function () {
+    console.log('Server up: http://localhost:' + app.get('port'));
+});
