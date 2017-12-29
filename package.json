@@ -4,11 +4,23 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "webpack"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.5.0",
     "express": "^4.16.2",
-    "mongodb": "^3.0.1"
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.10",
+    "mongodb": "^3.0.1",
+    "morgan": "^1.9.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.6",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
+  }
 }
