@@ -1,11 +1,12 @@
 var http = require('http');
 var querystring = require('querystring');
 var postData = querystring.stringify({
-    'msg': 'Hello World!'
+    'msg': 'Hello World!',
+    'msg2': 'This is a secret message from Bruce'
 });
 var options = {
     hostname: 'localhost',
-    port: 8124,
+    port: 8899,
     method: 'POST',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
