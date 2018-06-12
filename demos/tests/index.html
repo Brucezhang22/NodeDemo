@@ -8,15 +8,24 @@
     <title>Document</title>
     <style>
         div {
-            white-space: pre-line;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
         }
     </style>
 </head>
 
 <body>
     <div>
-        this is a line break test
+
     </div>
+
+    <script src="./jquery-2.2.4.min.js"></script>
+    <script>
+        $('div').hover(function(){
+            $(this).css('background-color','#ff0000');
+        });
+    </script>
 </body>
 
 </html>
