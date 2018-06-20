@@ -7,24 +7,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        div {
-            width: 100px;
-            height: 100px;
-            background-color: aqua;
-        }
+
     </style>
 </head>
 
 <body>
-    <div>
+    <div id="chartContainer">
 
     </div>
 
     <script src="./jquery-2.2.4.min.js"></script>
     <script>
-        $('div').hover(function(){
-            $(this).css('background-color','#ff0000');
+        const legendData = ['hello world', 'welcome back', 'hotel california', 'never leave'];
+
+        const tickBox = $('<div/>', {
+            class: 'tickBox',
+            html: $('<div/>', {
+                class: 'ticked'
+            })
         });
+
+        const legendContent = legendData.map(item => {
+            return $('<li/>', {
+                dataId: `${item.split(' ')[0]}`,
+                html: `${tickBox.prop('outerHTML')} ${item}`
+                /* I know I could do this */
+                // html: `<div class="tickBox"><div class="ticked"></div></div> ${item}`
+            });
+        });
+
+        $('<div/>', {
+            id: 'chartLegend',
+            class: 'legend',
+            title: 'Chart legend',
+            html: '<p id="chartLegendHeader">Legend</p>'
+        }).appendTo(`#chartContainer`);
+
+        $('<ul/>', {
+            class: 'legend',
+            html: legendContent
+        }).appendTo('#chartLegend');
     </script>
 </body>
 
