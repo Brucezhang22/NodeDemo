@@ -1,92 +1,18 @@
-import React, { Component } from "react";
-import {
-    View,
-    AsyncStorage,
-    KeyboardAvoidingView,
-    Text,
-    ActivityIndicator
-} from "react-native";
-import {
-    Card,
-    Button,
-    FormLabel,
-    FormInput,
-    Icon
-} from "react-native-elements";
-import { onSignIn } from "../auth";
-import { createStackNavigator } from "react-navigation";
-import axios from "axios";
-//import { Header, Body } from "native-base";
+var html = '<div class="captureMainWrap" style="position:absolute; top:100px; right: 10px;"><div class="captureCollapse" style="cursor: pointer;"><i class="captureAccordian fa fa-caret-right" style="color:#fff; margin: 11px 5px 0 5px; font-size:25px;"></i></div><div class="capture"><div id="screenEmulator" style="margin-top:6px;"><select class="selDevice" id="selectDevice"><option disabled selected hidden>Select Resolution</option><option data-height="100%" data-width="100%">My Screen</option><option data-height="568px" data-width="320px">iphone 5s (320 X 568)</option><option data-height="627px" data-width="375px">iphone 6s (375 X 627)</option><option data-height="1024px" data-width="768px">ipad portrait (768 X 1024)</option><option data-height="768px" data-width="1024px">ipad landscape (1024 X 768)</option><option data-height="567px" data-width="360px">Nexus 5 (360 X 567)</option><option data-height="659px" data-width="412px">Nexus 6 (412 X 659)</option></select></div><div class="append"></div><div class="onCamera"><i class="fa fa-camera" id="onCameraClick" style="font-size:25px text-shadow: 0px 0px 3px #00fa91;"></i><div></div></div> </div></div>';
+$('body').append(html);
+var div = '<div id="maindiv"></div>';
+var body = $('body');
+var head = $('head');
+$('html').append(div);
+$('#maindiv').append(body);
+$('#maindiv').append(head);
 
-class SignIn extends Component {
-    state = {
-        username: "vipul",
-        password: "123456",
-        username: '',
-        loading: false
-    };
-
-    loginHandler = async () => {
-        this.setState({ loading: true });
-        try {
-            let { data } = await axios
-                .post("http://offer.kdamjibhai.com/api/login", {
-                    username: this.state.username,
-                    password: this.state.password
-                })
-                .then(response => {
-                    //console.log(response.data.data.user_info.user_id);
-                    //alert(response.data.data.message)
-                    if (response.data.status_code === 200) {
-                        if (response.data.data.status === "success") {
-                            //alert('came here ')
-                            AsyncStorage.setItem("loggedIn", "true");
-                            AsyncStorage.setItem('userid', response.data.data.user_info.user_id);
-
-                            this.setState({ loading: false });
-                            this.props.navigation.navigate("SignedIn");
-                        }
-                    } else {
-                        alert(response.data.data.message);
-                        this.setState({ loading: false });
-                    }
-                });
-        } catch (err) {
-            console.log(err);
-        }
-
-    };
-
-    render() {
-        return (
-            <View
-                backgroundColor="#2b3643"
-                style={{ flex: 1, paddingVertical: "10%" }}
-            >
-                <Card>
-                    <ActivityIndicator animating={this.state.loading} />
-                    <FormLabel>Username</FormLabel>
-                    <FormInput
-                        placeholder="Username address..."
-                        onChangeText={username => this.setState({ username })}
-                        autoCapitalize="none"
-                    />
-                    <FormLabel>Password</FormLabel>
-                    <FormInput
-                        secureTextEntry
-                        placeholder="Password..."
-                        onChangeText={password => this.setState({ password })}
-                    />
-                    <Button
-                        buttonStyle={{ marginTop: 20 }}
-                        backgroundColor="#03A9F4"
-                        title="SIGN IN"
-                        onPress={this.loginHandler}
-                    />
-                </Card>
-            </View>
-        );
+$('#selectDevice').change(function () {
+    var selectHeight = $("#selectDevice").find('option:selected').attr('data-height');
+    var selectWidth = $("#selectDevice").find('option:selected').attr('data-width');
+    if (($("#selectDevice").val() == "My Screen")) {
+        $('#maindiv').css('width', '100px');
+    }else {
+        $('#maindiv').css('width', selectWidth);
     }
-}
-
-export default SignIn;
+});

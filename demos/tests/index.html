@@ -7,46 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
 <body>
-    <div id="chartContainer">
-
-    </div>
+    <canvas id="canvas"></canvas>
 
     <script src="./jquery-2.2.4.min.js"></script>
     <script>
-        const legendData = ['hello world', 'welcome back', 'hotel california', 'never leave'];
+        var canvas = document.getElementById('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerWidth * 990 / 1400;
+        var ctx = canvas.getContext('2d');
 
-        const tickBox = $('<div/>', {
-            class: 'tickBox',
-            html: $('<div/>', {
-                class: 'ticked'
-            })
-        });
+        var image = new Image();   // using optional size for image
+        image.onload = drawImageOfCanvasSize; // draw when image has loaded
+        image.src = 'certificate.jpg';
 
-        const legendContent = legendData.map(item => {
-            return $('<li/>', {
-                dataId: `${item.split(' ')[0]}`,
-                html: `${tickBox.prop('outerHTML')} ${item}`
-                /* I know I could do this */
-                // html: `<div class="tickBox"><div class="ticked"></div></div> ${item}`
-            });
-        });
-
-        $('<div/>', {
-            id: 'chartLegend',
-            class: 'legend',
-            title: 'Chart legend',
-            html: '<p id="chartLegendHeader">Legend</p>'
-        }).appendTo(`#chartContainer`);
-
-        $('<ul/>', {
-            class: 'legend',
-            html: legendContent
-        }).appendTo('#chartLegend');
+        function drawImageOfCanvasSize() {
+            ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+        }
     </script>
 </body>
 
